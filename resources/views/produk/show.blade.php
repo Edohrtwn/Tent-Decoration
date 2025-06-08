@@ -1,0 +1,226 @@
+@extends('layouts.main')
+
+@section('container')
+  <div class="bg-[#F8FAFF] sm:px-25 px-8 sm:py-16 py-8">
+    <div class="grid sm:grid-cols-2 grid-cols-1 gap-8">
+      <div>
+        <img class="!h-[492px] !w-full object-cover rounded-lg" src="/img/home/paket-a.png" />
+        <div class="grid sm:grid-cols-4 grid-cols-2 gap-4 mt-6">
+          <img class="!h-[124px] !w-full object-cover rounded-lg" src="/img/home/paket-a.png" />
+          <img class="!h-[124px] !w-full object-cover rounded-lg" src="/img/home/paket-a.png" />
+          <img class="!h-[124px] !w-full object-cover rounded-lg" src="/img/home/paket-a.png" />
+          <img class="!h-[124px] !w-full object-cover rounded-lg" src="/img/home/paket-a.png" />
+        </div>
+        <p class="text-[#344054] font-semibold text-[24px] !mb-0 mt-8">Review</p>
+        <div id="scrollContainer" class="overflow-x-auto sm:overflow-x-hidden select-none -mx-2 px-2">
+          <div class="flex gap-4 min-w-max">
+            @foreach(range(1, 4) as $i)
+            <div class="w-[295px] rounded shrink-0 p-4">
+              <div class="flex justify-between mb-2">
+                <div class="flex gap-2 items-center">
+                  <img src="/img/home/profil-ulasan.jpg" alt="profil" class="w-[44px] rounded-full">
+                  <span class="font-semibold text-[16px]">Alex Stanton</span>
+                </div>
+                <div class="text-[#90A3BF] text-[12px] text-right">
+                  <div>21 July 2022</div>
+                  <div>
+                    @for($j = 0; $j < 5; $j++)
+                      <i class="{{ $j < 4 ? 'fas' : 'far' }} fa-star text-yellow-400"></i>
+                    @endfor
+                  </div>
+                </div>
+              </div>
+              <p class="text-sm text-[#344054] line-clamp-2">We are very happy with the service from the MORENT App. Morent has a low price.</p>
+            </div>
+            @endforeach
+          </div>
+        </div>
+        <p class="text-[#344054] font-semibold text-[24px]  !p-0">Tambahkan Review</p>
+        <!-- Textarea -->
+        <textarea
+          class="w-full border border-[#D0D5DD] rounded-lg p-3 text-sm text-[#344054] placeholder-[#98A2B3] focus:outline-none focus:ring-2 focus:ring-[#D0D5DD]"
+          rows="4"
+          placeholder="Tulis reviewmu disini"></textarea>
+
+        <!-- Input Text -->
+        <input
+          type="text"
+          class="w-full border border-[#D0D5DD] rounded-lg p-3 text-sm text-[#344054] placeholder-[#98A2B3] mt-4 focus:outline-none focus:ring-2 focus:ring-[#D0D5DD]"
+          placeholder="Nama Lengkap" />
+
+        <input
+          type="email"
+          class="w-full border border-[#D0D5DD] rounded-lg p-3 text-sm text-[#344054] placeholder-[#98A2B3] mt-4 focus:outline-none focus:ring-2 focus:ring-[#D0D5DD]"
+          placeholder="Email" />
+
+        <button class="bg-[#3563E9] text-white mt-3 px-15 py-1 rounded-lg cursor-pointer">Kirim Review</button>
+
+      </div>
+
+      <div class="bg-white border border-[#90A3BF80] rounded-md p-4">
+        <p class="text-center text-black font-bold text-[32px] !p-0 !m-0">Paket A</p>
+        <p class="text-center text-[#3563E9] font-bold text-[32px] !p-0 !m-0">Rp30.000.000</p>
+        <div class="flex justify-center items-center">
+          <i class="fas fa-star text-yellow-400 me-1"></i>
+          <i class="fas fa-star text-yellow-400 me-1"></i>
+          <i class="fas fa-star text-yellow-400 me-1"></i>
+          <i class="fas fa-star text-yellow-400 me-1"></i>
+          <i class="far fa-star text-yellow-400 me-1"></i>
+          <span class="text-[#596780] font-semibold ">+21 Review</span>
+        </div>
+        <p class=" text-black font-semibold text-[24px] !p-0 !m-0">Deskripsi Layanan</p>
+        <ul class="list-disc">
+          <li class="font-normal text-[#1A202C] text-[20px]">1 Set Pelaminan Luar</li>
+          <li class="font-normal text-[#1A202C] text-[20px]">500 Pcs Kursi Tamu</li>
+          <li class="font-normal text-[#1A202C] text-[20px]">5 Set Meja Tamu VIP</li>
+          <li class="font-normal text-[#1A202C] text-[20px]">2 Kotak Amplop</li>
+          <li class="font-normal text-[#1A202C] text-[20px]">3 Meja Prasmanan + Set Prasmanan</li>
+          <li class="font-normal text-[#1A202C] text-[20px]">1 Set Meja Akad</li>
+          <li class="font-normal text-[#1A202C] text-[20px]">4 Tenda Tamu</li>
+        </ul>
+        <div class="grid sm:grid-cols-2 grid-cols-1 gap-4">
+          <div>
+            <p class=" text-black font-normal text-[18px] !p-0 !m-0">Tanggal Mulai</p>
+            <div class="relative w-full max-w-xs">
+              <input
+                type="text"
+                id="datepicker"
+                placeholder="Pilih Tanggal"
+                class="border border-[#D0D5DD] rounded-lg p-2 w-full pr-10"
+                readonly
+              />
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                <!-- Icon kalender pakai fontawesome / svg -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p class=" text-black font-normal text-[18px] !p-0 !m-0">Tanggal Selesai</p>
+            <div class="relative w-full max-w-xs">
+              <input
+                type="text"
+                id="datepicker"
+                placeholder="Pilih Tanggal"
+                class="border border-[#D0D5DD] rounded-lg p-2 w-full pr-10"
+                readonly
+              />
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                <!-- Icon kalender pakai fontawesome / svg -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        {{-- <button class="bg-[#3563E9] text-white mt-3 py-1 rounded-lg cursor-pointer w-full">
+          Lanjut Pesan
+        </button> --}}
+        <a href="{{ route('pembayaran.detail', ['id' => '2']) }}" class="w-full bg-[#3563E9] px-2 py-1 rounded text-[16px] text-center !no-underline !text-white font-medium mt-4 inline-block">
+          Lanjut Pesan
+        </a>
+      </div>
+    </div>
+    <p class="text-[#344054] font-semibold text-[24px] !p-0 !mt-10">Lihat Paket lainnya</p>
+    <div class="grid sm:grid-cols-2 grid-cols-1 gap-4">
+      <div class="bg-white border border-[#C2C2C280] p-4 rounded-lg">
+        <img class="!h-[222px] !w-full object-cover rounded-lg" src="/img/home/paket-a.png" />
+        <div class="flex justify-between mt-10">
+          <span class="font-[600] text-[24px]">Paket B</span>
+          <span class="font-[600] text-[24px] text-[#264BC8]">Rp20.000.000</span>
+        </div>
+        <div class="font-semibold">Kenyamanan dan Keindahan: Solusi Sempurna untuk Acara Anda</div>
+        <a href="{{ route('produk.show', ['id' => '2']) }}" class="bg-[#3563E9] px-2 py-1 rounded 
+          text-[16px] !no-underline !text-white font-medium mt-4 inline-block">
+          Sewa Sekarang
+        </a>
+      </div>
+      <div class="bg-white border border-[#C2C2C280] p-4 rounded-lg">
+        <img class="!h-[222px] !w-full object-cover rounded-lg" src="/img/home/paket-a.png" />
+        <div class="flex justify-between mt-10">
+          <span class="font-[600] text-[24px]">Paket C</span>
+          <span class="font-[600] text-[24px] text-[#264BC8]">Rp15.000.000</span>
+        </div>
+        <div class="font-semibold">Pilihan Hemat dengan Kualitas Terbaik</div>
+        <a href="{{ route('produk.show', ['id' => '2']) }}" class="bg-[#3563E9] px-2 py-1 rounded 
+          text-[16px] !no-underline !text-white font-medium mt-4 inline-block">
+          Sewa Sekarang
+        </a>
+      </div>
+    </div>
+
+  </div>
+@endsection
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const container = document.getElementById('scrollContainer');
+    if (!container) return;
+
+    let isDragging = false;
+    let startX;
+    let scrollLeft;
+
+    // === Desktop (Mouse) ===
+    container.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+    });
+
+    container.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    container.addEventListener('mouseleave', () => {
+      isDragging = false;
+    });
+
+    container.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      container.scrollLeft = scrollLeft - walk;
+    });
+
+    // === Mobile (Touch) ===
+    container.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      startX = e.touches[0].pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+    });
+
+    container.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+
+    container.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const x = e.touches[0].pageX - container.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      container.scrollLeft = scrollLeft - walk;
+    });
+
+    const bookedDates = ["2025-06-10", "2025-06-15", "2025-06-20"];
+
+    flatpickr("#datepicker", {
+      dateFormat: "Y-m-d",
+      disable: bookedDates,
+      onDayCreate: function(dObj, dStr, fp, dayElem) {
+        const date = dayElem.dateObj;
+        const dateStr = fp.formatDate(date, "Y-m-d");
+        if (bookedDates.includes(dateStr)) {
+          dayElem.classList.add("!bg-red-500", "!text-white", "cursor-not-allowed");
+        }
+      }
+    });
+
+
+  });
+</script>
