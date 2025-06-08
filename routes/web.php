@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PaketDekorasiController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,15 @@ Route::middleware(['auth', 'role:user'])->get('/user/dashboard', function () {
 Route::middleware(['auth', 'role:admin'])->get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
+
+// paket crud
+Route::get('/paket', [PaketDekorasiController::class, 'index'])->name('paket-dekorasi.index');
+Route::get('/paket/create', [PaketDekorasiController::class, 'create'])->name('paket-dekorasi.create');
+Route::delete('/paket/{paket_dekorasi}', [PaketDekorasiController::class, 'destroy'])->name('paket-dekorasi.destroy');
+Route::post('/paket', [PaketDekorasiController::class, 'store'])->name('paket-dekorasi.store');
+Route::get('/paket/{paket_dekorasi}/edit', [PaketDekorasiController::class, 'edit'])->name('paket-dekorasi.edit');
+Route::put('/paket/{paket_dekorasi}', [PaketDekorasiController::class, 'update'])->name('paket-dekorasi.update');
+Route::delete('/paket/foto/{foto}', [PaketDekorasiController::class, 'deleteFoto'])->name('paket-dekorasi.delete-foto');
 
 // Route register
 Route::get('/register', function () {
