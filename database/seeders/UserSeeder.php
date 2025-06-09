@@ -12,18 +12,24 @@ class UserSeeder extends Seeder
     {
         // Admin
         User::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => '123456', // ganti dengan password aman
-            'role' => 'admin',
+            'first_name' => 'Admin',
+            'last_name'  => '',
+            'email'      => 'admin@gmail.com',
+            'phone'      => '081234567890',
+            'address'    => 'Alamat Admin',
+            'password'   => Hash::make('123456'), // HARUS di-hash
+            'role'       => 'admin',
         ]);
 
-        // User
+        // User Biasa
         User::create([
-            'name' => 'User Biasa',
-            'email' => 'user@gmail.com',
-            'password' => '123456', // ganti dengan password aman
-            'role' => 'user',
+            'first_name' => 'User',
+            'last_name'  => 'Biasa',
+            'email'      => 'user@gmail.com',
+            'phone'      => '081234567891',
+            'address'    => 'Alamat User',
+            'password'   => Hash::make('123456'), // HARUS di-hash
+            'role'       => 'user',
         ]);
     }
 }

@@ -2,17 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pemesanan;
 use Illuminate\Http\Request;
 
 class PembayaranController extends Controller
 {
     public function detail($id)
     {
-        // Contoh ambil data produk dari database
-        // $produk = Produk::findOrFail($id); // jika kamu punya model Produk
+        $pemesanan = Pemesanan::findOrFail($id);
 
         return view('produk.bayar', [
-            'id' => $id, // sementara cuma kirim ID, nanti bisa ganti dengan $produk
+            'pemesanan' => $pemesanan
         ]);
+    }
+
+    public function uploadBukti(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:pemesanans,id',
+            'bukti_pembayaran' => 'required|image|mimes:jpg,jpeg,png',
+        ]);
+
+        $pemesanan = Pemesanan::findOrFail($request->id);
+
+        $path = $request->file('bukti_pembayaran')->store('bukti', 'public');
+
+        $pemesanan->update([
+            'bukti_pembayaran' => $path,
+            'status_pembayaran' => 'pending',
+        ]);
+
+        return back()->with('success', 'Bukti pembayaran berhasil dikirim.');
     }
 }

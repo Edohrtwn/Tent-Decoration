@@ -9,7 +9,7 @@
 
       <div class="bg-white border border-[#90A3BF80] rounded-md p-4">
         <p class="text-center text-black font-bold text-[24px] !p-0 !m-0">Bukti Pemesanan</p>
-        <p class=" text-[#344054] font-semibold text-[18px] !p-0 !m-0">Paket A</p>
+        <p class=" text-[#344054] font-semibold text-[18px] !p-0 !m-0">{{ $pemesanan->paket_dekorasi->nama_paket }}</p>
         <table class="table-auto">
           <tbody>
             <tr>
@@ -32,23 +32,37 @@
 
         <p class=" text-black font-bold text-[24px] !mb-0 !pb-0">Detail Pemesanan</p>
 
-        <ul class="list-disc !mt-0 !pt-0">
-          <li class="font-normal text-[#1A202C] text-[20px]">1 Set Pelaminan Luar</li>
-          <li class="font-normal text-[#1A202C] text-[20px]">500 Pcs Kursi Tamu</li>
-          <li class="font-normal text-[#1A202C] text-[20px]">5 Set Meja Tamu VIP</li>
-          <li class="font-normal text-[#1A202C] text-[20px]">2 Kotak Amplop</li>
-          <li class="font-normal text-[#1A202C] text-[20px]">3 Meja Prasmanan + Set Prasmanan</li>
-          <li class="font-normal text-[#1A202C] text-[20px]">1 Set Meja Akad</li>
-          <li class="font-normal text-[#1A202C] text-[20px]">4 Tenda Tamu</li>
+        <ul class="list-disc ps-5 !m-0 ">
+          @foreach(explode("\n", $pemesanan->paket_dekorasi->detail) as $item)
+            @if(trim($item) !== '')
+              <li class="font-normal text-[#1A202C] text-[20px]">{{ trim($item) }}</li>
+            @endif
+          @endforeach
         </ul>
+        
         <div>
-          <p class=" text-[#344054] font-semibold text-[16px] !p-0 !m-0">Bukti Pembayaran <span class="!font-bold !text-red-500">*</span> </p>
-          <input type="file" class="border border-[#D0D5DD] block w-full cursor-pointer px-3 py-1 rounded" />
+          @if(session('success'))
+            <p class="text-green-600">{{ session('success') }}</p>
+          @endif
+          <form action="{{ route('pembayaran.upload') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="id" value="{{ $pemesanan->id }}">
+            <p class=" text-[#344054] font-semibold text-[16px] !p-0 !m-0">Bukti Pembayaran <span class="!font-bold !text-red-500">*</span> </p>
+            <input type="file" name="bukti_pembayaran" class="border border-[#D0D5DD] block w-full cursor-pointer px-3 py-1 rounded" />
+            <button class="bg-[#3563E9] text-white mt-3 py-1 rounded-lg cursor-pointer w-full">
+              Kirim Bukti Pembayaran
+            </button>
+          </form>
+          @if($pemesanan->bukti_pembayaran)
+            <div class="mt-4">
+              <p>Status: <strong>{{ ucfirst($pemesanan->status_pembayaran) }}</strong></p>
+              <img src="{{ asset('storage/' . $pemesanan->bukti_pembayaran) }}" class="w-60 mt-2 border" />
+              <a href="/" class="bg-[#3563E9] mt-2 block text-center !text-white !no-underline rounded-md py-1">Kembali Ke Home</a>
+            </div>
+          @endif
         </div>
         
-        <button class="bg-[#3563E9] text-white mt-3 py-1 rounded-lg cursor-pointer w-full">
-          Kirim Bukti Pembayaran
-        </button>
+        
       </div>
     </div>
   </div>

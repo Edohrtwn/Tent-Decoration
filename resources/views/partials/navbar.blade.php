@@ -17,7 +17,7 @@
           <div class="flex items-center">
             @guest
                 <a href="{{ route('login') }}" class="!no-underline hover:!no-underline rounded-[8px] bg-[#3563E9] !text-white px-6 py-1 me-2">Login</a>
-                <a href="{{ route('login') }}" class="!no-underline hover:!no-underline rounded-[8px] bg-[#3563E9] !text-white px-6 py-1">Daftar</a>
+                <a href="{{ route('register.create') }}" class="!no-underline hover:!no-underline rounded-[8px] bg-[#3563E9] !text-white px-6 py-1">Daftar</a>
             @else
                 <a href="{{ auth()->user()->role === 'admin' ? route('admin.dashboard') : route('user.dashboard') }}">
                     <img src="/img/dashboard-admin/avatar.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />

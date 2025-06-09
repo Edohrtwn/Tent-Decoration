@@ -4,28 +4,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Login | Tent Decoration</title>
+  <title>Register | Tent Decoration</title>
   
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="h-screen plus-jakarta-sans font-normal ">
+<body class="h-screen plus-jakarta-sans font-normal">
   <div class="grid sm:grid-cols-2 min-h-screen">
     <!-- FORM: tampil dulu di mobile -->
-    <div class="order-2 sm:order-none">
-      <img src="/img/login/login.png" class="h-screen w-full object-cover" alt="Login Image">
-    </div>
-    <div class="order-1 sm:order-none flex items-center justify-center p-6">
-      <form method="POST" action="{{ route('login.post') }}" class="bg-white p-6 rounded w-full max-w-md">
+    <div class="flex items-center justify-center p-6">
+      
+      <form method="POST" action="{{ route('register.store') }}" class="bg-white p-6 rounded w-full max-w-md">
         @csrf
-        <h2 class="text-[28px] font-semibold mb-4 text-center !text-[#101828]">Masuk ke akun</h2>
+        <p class="text-center text-[#5A5A5D] text-[16px]">Selamat Datang!</p>
+        <h2 class="text-[28px] font-semibold mb-4 text-center !text-[#101828]">Pendaftaran Akun</h2>
 
         @error('email')
           <div class="text-red-500 text-sm mb-2">{{ $message }}</div>
         @enderror
 
+        <div class="flex gap-4">
+          <div class="mb-4">
+            <label class="font-semibold text-[#344054] text-[16px]">Nama Depan</label>
+            <input placeholder="Nama Depan" type="text" name="first_name" value="{{ old('first_name') }}" required class="w-full border border-[#D0D5DD] rounded px-3 py-2">
+          </div>
+          <div class="mb-4">
+            <label class="font-semibold text-[#344054] text-[16px]">Nama Belakang</label>
+            <input placeholder="Nama Belakang" type="text" name="last_name" value="{{ old('last_name') }}" required class="w-full border border-[#D0D5DD] rounded px-3 py-2">
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="font-semibold text-[#344054] text-[16px]">No Handphone</label>
+          <input placeholder="082217812379" type="text" name="phone" value="{{ old('phone') }}" required class="w-full border border-[#D0D5DD] rounded px-3 py-2">
+        </div>
+
+        <div class="mb-4">
+          <label class="font-semibold text-[#344054] text-[16px]">Alamat</label>
+          <input placeholder="Patimura Kota Jambi" type="text" name="address" value="{{ old('address') }}" required class="w-full border border-[#D0D5DD] rounded px-3 py-2">
+        </div>
+
         <div class="mb-4">
           <label class="font-semibold text-[#344054] text-[16px]">Email</label>
-          <input placeholder="contoh@gmail.com" type="email" name="email" required class="w-full border border-[#D0D5DD] rounded px-3 py-2">
+          <input placeholder="contoh@gmail.com" type="email" name="email" required class="w-full border border-[#D0D5DD] rounded px-3 py-2" value="{{ old('email') }}">
         </div>
 
         <div class="mb-4 relative">
@@ -37,6 +57,7 @@
             placeholder="Masukkan Password"
             required 
             class="w-full border border-gray-300 rounded px-3 py-2 pr-10 mt-1"
+            value="{{ old('password') }}"
           >
 
           <!-- Eye Icon Button -->
@@ -65,12 +86,22 @@
           </button>
         </div>
 
-        <button type="submit" class="cursor-pointer w-full bg-[#264BC8] text-white py-2 rounded text-[16px] font-semibold">Login Sekarang</button>
-        <p class="text-center mt-5"><span class="text-[#98A2B3]">Tidak punya akun?</span> <a href="{{ route('register.create') }}" class="text-[#0169BF]">Daftar Sekarang</a></p>
+        <button type="submit" class="cursor-pointer w-full bg-[#264BC8] text-white py-2 rounded text-[16px] font-semibold">Buat Akun</button>
+        @if ($errors->any())
+          <div style="color: red;">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+        @endif
+        <p class="text-center mt-5"><span class="text-[#98A2B3]">Sudah Punya Akun?</span> <a href="{{ route('login') }}" class="text-[#0169BF]">Log in</a></p>
       </form>
     </div>
-
-    <!-- GAMBAR: tampil kedua di mobile -->
+    <div class="">
+      <img src="/img/login/login.png" class="h-screen w-full object-cover" alt="Login Image">
+    </div>
     
   </div>
 

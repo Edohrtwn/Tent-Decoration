@@ -6,19 +6,20 @@ use App\Http\Controllers\PaketDekorasiController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/produk/{id}', [ProdukController::class, 'show'])->middleware('auth')->name('produk.show');
 
-Route::get('/pembayaran/{id}', [PembayaranController::class, 'detail'])->name('pembayaran.detail');
-
-
-
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Route register
+Route::get('/register', [RegisterController::class, 'create'])->name('register.create');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 // Contoh route tujuan
 Route::middleware(['auth', 'role:user'])->get('/user/dashboard', function () {
@@ -41,8 +42,5 @@ Route::delete('/paket/foto/{foto}', [PaketDekorasiController::class, 'deleteFoto
 // route pemesanan
 Route::post('/pemesanan', [PemesananController::class, 'store'])->name('pemesanan.store');
 
-
-// Route register
-Route::get('/register', function () {
-    return view('auth.register'); // resources/views/auth/register.blade.php
-})->name('register');
+Route::get('/pembayaran/{id}', [PembayaranController::class, 'detail'])->name('pembayaran.detail');
+Route::post('/pembayaran/upload', [PembayaranController::class, 'uploadBukti'])->name('pembayaran.upload');
