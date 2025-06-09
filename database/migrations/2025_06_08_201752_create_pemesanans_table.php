@@ -9,6 +9,7 @@ return new class extends Migration {
     {
         Schema::create('pemesanans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('paket_dekorasi_id')->constrained()->onDelete('cascade');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
@@ -20,6 +21,11 @@ return new class extends Migration {
 
     public function down(): void
     {
+        Schema::table('pemesanans', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
+        });
+
         Schema::dropIfExists('pemesanans');
     }
 };

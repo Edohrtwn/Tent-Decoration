@@ -15,17 +15,17 @@
             <tr>
               <td class="text-[#344054] font-medium pr-6 py-1">Nama</td>
               <td class="text-[#344054] font-medium pr-6 py-1">:</td>
-              <td class="text-[#344054] font-medium py-1">Roger</td>
+              <td class="text-[#344054] font-medium py-1">{{ $pemesanan->user->first_name }}</td>
             </tr>
             <tr>
               <td class="text-[#344054] font-medium pr-6 py-1">Alamat</td>
               <td class="text-[#344054] font-medium pr-6 py-1">:</td>
-              <td class="text-[#344054] font-medium py-1">Mendalo Darat</td>
+              <td class="text-[#344054] font-medium py-1">{{ $pemesanan->user->address }}</td>
             </tr>
             <tr>
               <td class="text-[#344054] font-medium pr-6 py-1">Tanggal</td>
               <td class="text-[#344054] font-medium pr-6 py-1">:</td>
-              <td class="text-[#344054] font-medium py-1">24 Agustus 2025</td>
+              <td class="text-[#344054] font-medium py-1">{{ $pemesanan->tanggal_mulai }}</td>
             </tr>
           </tbody>
         </table>

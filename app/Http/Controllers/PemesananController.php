@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PemesananController extends Controller
@@ -20,7 +21,6 @@ class PemesananController extends Controller
         $mulai = $request->tanggal_mulai;
         $selesai = $request->tanggal_selesai;
 
-        // Cek apakah ada pemesanan yang bentrok
         $overlap = Pemesanan::where('paket_dekorasi_id', $paketId)
             ->where(function ($query) use ($mulai, $selesai) {
                 $query->whereBetween('tanggal_mulai', [$mulai, $selesai])
@@ -36,8 +36,8 @@ class PemesananController extends Controller
             return back()->withErrors(['Tanggal sudah dipesan. Silakan pilih tanggal lain.'])->withInput();
         }
 
-        // Simpan dan redirect
         $pemesanan = Pemesanan::create([
+            'user_id' => Auth::id(), // ← Simpan ID user yang login
             'paket_dekorasi_id' => $paketId,
             'tanggal_mulai' => $mulai,
             'tanggal_selesai' => $selesai,
