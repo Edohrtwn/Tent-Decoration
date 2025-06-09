@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
             $table->string('bukti_pembayaran')->nullable(); 
-            $table->enum('status_pembayaran', ['pending', 'disetujui', 'ditolak'])->default('pending'); 
+            $table->enum('status_pembayaran', ['Belum Bayar', 'Diproses', 'Sudah Bayar', 'Cancel', 'Pembayaran Ditolak'])->default('Belum Bayar'); 
             $table->timestamps();
         });
     }

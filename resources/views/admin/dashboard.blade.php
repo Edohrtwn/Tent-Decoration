@@ -29,7 +29,7 @@
             </tr>
           </tbody>
         </table>
-        <a href="#" class="py-1 px-20 mt-4 inline-flex gap-2 items-center text-[#FFFFFF] bg-[#3563E9] font-semibold text-[14px] rounded-md ">
+        <a href="#" class="no-underline py-1 px-20 mt-4 inline-flex gap-2 items-center !text-[#FFFFFF] bg-[#3563E9] font-semibold text-[14px] rounded-md ">
           Ubah Profile
         </a>
       </div>

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminPemesananController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardUser;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaketDekorasiController;
 use App\Http\Controllers\PembayaranController;
@@ -22,9 +24,7 @@ Route::get('/register', [RegisterController::class, 'create'])->name('register.c
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 // Contoh route tujuan
-Route::middleware(['auth', 'role:user'])->get('/user/dashboard', function () {
-    return view('user.dashboard');
-})->name('user.dashboard');
+Route::middleware(['auth', 'role:user'])->get('/user/dashboard', [DashboardUser::class, 'index'])->name('user.dashboard');
 
 Route::middleware(['auth', 'role:admin'])->get('/admin/dashboard', function () {
     return view('admin.dashboard');
@@ -43,4 +43,12 @@ Route::delete('/paket/foto/{foto}', [PaketDekorasiController::class, 'deleteFoto
 Route::post('/pemesanan', [PemesananController::class, 'store'])->name('pemesanan.store');
 
 Route::get('/pembayaran/{id}', [PembayaranController::class, 'detail'])->name('pembayaran.detail');
+Route::get('/berhasil/{id}', [PembayaranController::class, 'berhasil'])->name('pembayaran.berhasil');
 Route::post('/pembayaran/upload', [PembayaranController::class, 'uploadBukti'])->name('pembayaran.upload');
+
+
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/pemesanans', [AdminPemesananController::class, 'index'])->name('admin.pemesanans.index');
+    Route::put('/admin/pemesanan/{id}/status', [AdminPemesananController::class, 'updateStatus'])->name('admin.pemesanan.updateStatus');
+    Route::get('/pemesanans/{id}', [AdminPemesananController::class, 'show'])->name('admin.pemesanans.show');
+});

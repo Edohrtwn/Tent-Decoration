@@ -16,6 +16,15 @@ class PembayaranController extends Controller
         ]);
     }
 
+    public function berhasil($id)
+    {
+        $pemesanan = Pemesanan::findOrFail($id);
+
+        return view('produk.sudah-bayar', [
+            'pemesanan' => $pemesanan
+        ]);
+    }
+
     public function uploadBukti(Request $request)
     {
         $request->validate([
@@ -29,7 +38,7 @@ class PembayaranController extends Controller
 
         $pemesanan->update([
             'bukti_pembayaran' => $path,
-            'status_pembayaran' => 'pending',
+            'status_pembayaran' => 'Diproses',
         ]);
 
         return back()->with('success', 'Bukti pembayaran berhasil dikirim.');

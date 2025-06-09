@@ -4,7 +4,7 @@
   <div class="bg-[#F8FAFF] sm:px-25 px-8 sm:py-16 py-8">
     <div class="grid sm:grid-cols-2 grid-cols-1 gap-8">
       <div>
-        <img class="!w-full object-cover rounded-lg border border-[#D0D5DD]" src="/img/bayar/qris.png" />
+        <img class="!w-full object-cover rounded-lg border border-[#D0D5DD]" src="{{ asset('storage/' . $pemesanan->bukti_pembayaran) }}" />
       </div>
 
       <div class="bg-white border border-[#90A3BF80] rounded-md p-4">
@@ -26,12 +26,6 @@
               <td class="text-[#344054] font-medium pr-6 py-1">Tanggal</td>
               <td class="text-[#344054] font-medium pr-6 py-1">:</td>
               <td class="text-[#344054] font-medium py-1">{{ $pemesanan->tanggal_mulai }}</td>
-            </tr>
-            <tr>
-              <td class="text-[#344054] font-medium pr-6 py-1">Status</td>
-              <td colspan="2" class="font-medium py-1" style="color: {{ $pemesanan->status_pembayaran === 'Sudah Bayar' ? '#7FB519' : '#EF4444' }}">
-                {{ $pemesanan->status_pembayaran }}
-              </td>
             </tr>
           </tbody>
         </table>

@@ -22,6 +22,7 @@ class PemesananController extends Controller
         $selesai = $request->tanggal_selesai;
 
         $overlap = Pemesanan::where('paket_dekorasi_id', $paketId)
+            ->where('status_pembayaran', '!=', 'Cancel')
             ->where(function ($query) use ($mulai, $selesai) {
                 $query->whereBetween('tanggal_mulai', [$mulai, $selesai])
                     ->orWhereBetween('tanggal_selesai', [$mulai, $selesai])
@@ -31,6 +32,7 @@ class PemesananController extends Controller
                     });
             })
             ->exists();
+
 
         if ($overlap) {
             return back()->withErrors(['Tanggal sudah dipesan. Silakan pilih tanggal lain.'])->withInput();
