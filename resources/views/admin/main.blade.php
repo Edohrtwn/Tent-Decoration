@@ -12,7 +12,7 @@
 
   <!-- Navbar -->
   <nav class="flex justify-between items-center bg-white px-20 py-3 shadow h-[70px]">
-    <div class="text-xl font-bold text-[32px] text-[#3563E9]">Tent Decoration</div>
+    <div class="text-xl font-bold text-[32px] text-[#3563E9]"><a href="/">Tent Decoration</a></div>
     <div class="flex items-center gap-4">
       <img src="/img/dashboard-admin/avatar.png" alt="Profile" class="w-10 h-10 rounded-full object-cover">
       <form method="POST" action="{{ route('logout') }}">

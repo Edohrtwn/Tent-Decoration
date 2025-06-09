@@ -15,5 +15,9 @@ class PaketDekorasi extends Model
     {
         return $this->hasMany(DekorasiPhoto::class);
     }
+    public function pemesanans()
+    {
+        return $this->hasMany(Pemesanan::class);
+    }
 }
 

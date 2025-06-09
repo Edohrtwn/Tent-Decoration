@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PaketDekorasi;
 use Illuminate\Http\Request;
+use Carbon\CarbonPeriod;
 
 class ProdukController extends Controller
 {
     public function show($id)
     {
-        // Contoh ambil data produk dari database
-        // $produk = Produk::findOrFail($id); // jika kamu punya model Produk
+        $paket = PaketDekorasi::with(['dekorasi_photos', 'pemesanans'])->findOrFail($id);
 
-        return view('produk.show', [
-            'id' => $id, // sementara cuma kirim ID, nanti bisa ganti dengan $produk
-        ]);
+        // Ambil semua tanggal yang sudah dipesan
+        $bookedDates = $paket->pemesanans->flatMap(function ($p) {
+            return collect(CarbonPeriod::create(
+                $p->tanggal_mulai,
+                $p->tanggal_selesai
+            ))->map(fn($date) => $date->format('Y-m-d'));
+        })->values()->all();
+
+        return view('produk.show', compact('paket', 'bookedDates'));
     }
 }

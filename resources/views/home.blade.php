@@ -15,44 +15,27 @@
   <div id="katalog" class="scroll-mt-24 bg-[#F8FAFF]">
     {{-- paket --}}
     <div class="sm:p-16 p-8">
-      <div class="grid sm:grid-cols-2 grid-rows-2 gap-4">
-        <div class="bg-white border border-[#C2C2C280] p-4 rounded-lg row-span-2">
-          <img class="!h-[682px] !w-full object-cover rounded-lg" src="/img/home/paket-a.png" />
-          <div class="flex justify-between mt-5">
-            <span class="font-[600] text-[24px]">Paket A</span>
-            <span class="font-[600] text-[24px] text-[#264BC8]">Rp30.000.000</span>
-          </div>
-          <div class="font-semibold">Elegance Unmatched: Tenda Mewah untuk Acara Spesial Anda</div>
-          <a href="{{ route('produk.show', ['id' => '2']) }}" class="bg-[#3563E9] px-2 py-1 rounded 
-            text-[16px] !no-underline !text-white font-medium mt-4 inline-block">
-            Sewa Sekarang
-          </a>
-        </div>
-        <div class="bg-white border border-[#C2C2C280] p-4 rounded-lg">
-          <img class="!h-[222px] !w-full object-cover rounded-lg" src="/img/home/paket-a.png" />
-          <div class="flex justify-between mt-10">
-            <span class="font-[600] text-[24px]">Paket B</span>
-            <span class="font-[600] text-[24px] text-[#264BC8]">Rp20.000.000</span>
-          </div>
-          <div class="font-semibold">Kenyamanan dan Keindahan: Solusi Sempurna untuk Acara Anda</div>
-          <a href="{{ route('produk.show', ['id' => '2']) }}" class="bg-[#3563E9] px-2 py-1 rounded 
-            text-[16px] !no-underline !text-white font-medium mt-4 inline-block">
-            Sewa Sekarang
-          </a>
-        </div>
-        <div class="bg-white border border-[#C2C2C280] p-4 rounded-lg">
-          <img class="!h-[222px] !w-full object-cover rounded-lg" src="/img/home/paket-a.png" />
-          <div class="flex justify-between mt-10">
-            <span class="font-[600] text-[24px]">Paket C</span>
-            <span class="font-[600] text-[24px] text-[#264BC8]">Rp20.000.000</span>
-          </div>
-          <div class="font-semibold">Kenyamanan dan Keindahan: Solusi Sempurna untuk Acara Anda</div>
-          <a href="{{ route('produk.show', ['id' => '2']) }}" class="bg-[#3563E9] px-2 py-1 rounded 
-            text-[16px] !no-underline !text-white font-medium mt-4 inline-block">
-            Sewa Sekarang
-          </a>
-        </div>
-      </div>
+      <div class="grid sm:grid-cols-2 grid-rows-auto gap-4">
+        @foreach ($pakets as $index => $paket)
+            <div class="bg-white border border-[#C2C2C280] p-4 rounded-lg {{ $index == 0 ? 'row-span-2' : '' }}">
+                <img 
+                    class="{{ $index == 0 ? '!h-[682px]' : '!h-[222px]' }} !w-full object-cover rounded-lg" 
+                    src="{{ $paket->dekorasi_photos->first() ? asset('storage/' . $paket->dekorasi_photos->first()->foto) : '/img/bg-home.png' }}" 
+                    alt="Foto Paket"
+                />
+                <div class="flex justify-between mt-5 {{ $index > 0 ? 'mt-10' : '' }}">
+                    <span class="font-[600] text-[24px]">{{ $paket->nama_paket }}</span>
+                    <span class="font-[600] text-[24px] text-[#264BC8]">Rp{{ number_format($paket->harga, 0, ',', '.') }}</span>
+                </div>
+                <div class="font-semibold">{{ $paket->detail }}</div>
+                <a href="{{ route('produk.show', ['id' => $paket->id]) }}" class="bg-[#3563E9] px-2 py-1 rounded 
+                    text-[16px] !no-underline !text-white font-medium mt-4 inline-block">
+                    Sewa Sekarang
+                </a>
+            </div>
+        @endforeach
+    </div>
+
 
     </div>
 

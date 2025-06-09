@@ -14,10 +14,24 @@
         </div>
 
         <div class="page-header__right">
-          <div>
-            <a href="{{ route('login') }}" class="!no-underline hover:!no-underline rounded-[8px] bg-[#3563E9] !text-white px-6 py-2 me-2">Login</a>
-            <a href="{{ route('login') }}" class="!no-underline hover:!no-underline rounded-[8px] bg-[#3563E9] !text-white px-6 py-2">Daftar</a>
-          </div>
+          <div class="flex items-center">
+            @guest
+                <a href="{{ route('login') }}" class="!no-underline hover:!no-underline rounded-[8px] bg-[#3563E9] !text-white px-6 py-1 me-2">Login</a>
+                <a href="{{ route('login') }}" class="!no-underline hover:!no-underline rounded-[8px] bg-[#3563E9] !text-white px-6 py-1">Daftar</a>
+            @else
+                <a href="{{ auth()->user()->role === 'admin' ? route('admin.dashboard') : route('user.dashboard') }}">
+                    <img src="/img/dashboard-admin/avatar.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+                </a>
+
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="ms-2 border border-[#C3D4E966] rounded-full p-1 cursor-pointer">
+                        <img src="/img/dashboard-admin/logout.png" alt="Logout" class="w-[24px] h-[24px] object-cover" />
+                    </button>
+                </form>
+            @endguest
+        </div>
+
           <div class="page-header__btn-menu"><a href="#offcanvas" data-uk-toggle data-uk-icon="menu"></a></div>
         </div>
       </div>

@@ -1,18 +1,17 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaketDekorasiController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home', [
-        "title" => "Home"
-    ]);
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/produk/{id}', [ProdukController::class, 'show'])->name('produk.show');
+Route::get('/produk/{id}', [ProdukController::class, 'show'])->middleware('auth')->name('produk.show');
+
 Route::get('/pembayaran/{id}', [PembayaranController::class, 'detail'])->name('pembayaran.detail');
 
 
@@ -38,6 +37,10 @@ Route::post('/paket', [PaketDekorasiController::class, 'store'])->name('paket-de
 Route::get('/paket/{paket_dekorasi}/edit', [PaketDekorasiController::class, 'edit'])->name('paket-dekorasi.edit');
 Route::put('/paket/{paket_dekorasi}', [PaketDekorasiController::class, 'update'])->name('paket-dekorasi.update');
 Route::delete('/paket/foto/{foto}', [PaketDekorasiController::class, 'deleteFoto'])->name('paket-dekorasi.delete-foto');
+
+// route pemesanan
+Route::post('/pemesanan', [PemesananController::class, 'store'])->name('pemesanan.store');
+
 
 // Route register
 Route::get('/register', function () {
