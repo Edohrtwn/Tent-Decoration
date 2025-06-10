@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminPemesananController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardAdmin;
 use App\Http\Controllers\DashboardUser;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaketDekorasiController;
@@ -26,9 +27,7 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 // Contoh route tujuan
 Route::middleware(['auth', 'role:user'])->get('/user/dashboard', [DashboardUser::class, 'index'])->name('user.dashboard');
 
-Route::middleware(['auth', 'role:admin'])->get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
+
 
 // paket crud
 Route::get('/paket', [PaketDekorasiController::class, 'index'])->name('paket-dekorasi.index');
@@ -46,8 +45,8 @@ Route::get('/pembayaran/{id}', [PembayaranController::class, 'detail'])->name('p
 Route::get('/berhasil/{id}', [PembayaranController::class, 'berhasil'])->name('pembayaran.berhasil');
 Route::post('/pembayaran/upload', [PembayaranController::class, 'uploadBukti'])->name('pembayaran.upload');
 
-
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/dashboard', [DashboardAdmin::class, 'index'])->name('admin.dashboard');
     Route::get('/pemesanans', [AdminPemesananController::class, 'index'])->name('admin.pemesanans.index');
     Route::put('/admin/pemesanan/{id}/status', [AdminPemesananController::class, 'updateStatus'])->name('admin.pemesanan.updateStatus');
     Route::get('/pemesanans/{id}', [AdminPemesananController::class, 'show'])->name('admin.pemesanans.show');
@@ -56,4 +55,9 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 Route::post('/produk/{id}/review', [ProdukController::class, 'storeReview'])
     ->middleware('auth')
     ->name('produk.review.store');
+
+    Route::middleware(['auth'])->group(function () {
+    Route::get('/ubah-password', [App\Http\Controllers\PasswordController::class, 'edit'])->name('password.edit');
+    Route::post('/ubah-password', [App\Http\Controllers\PasswordController::class, 'update'])->name('password.update');
+});
 

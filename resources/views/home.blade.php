@@ -44,101 +44,29 @@
       <div class="!bg-white px-4 py-2 rounded-xl">
         <span class="font-[600] text-[24px] ">Ulasan</span>
         <div id="scrollContainer" class="flex gap-4 !mt-2 overflow-x-hidden select-none">
-          <div class="min-w-[295px] rounded">
-            <div class="flex justify-between">
-              <div class="flex gap-2 items-center">
-                <img src="/img/home/profil-ulasan.jpg" alt="profil" class="w-[44px] rounded-full">
-                <span class="font-[600] text-[16px] ">Alex Stanton</span>
-              </div>
-              <div class="">
-                <div class="font-[500] text-[12px] text-[#90A3BF] text-end">21 July 2022</div>
-                <div class="font-[500] text-[12px] text-[#90A3BF]">
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="far fa-star text-yellow-400"></i>
+          @foreach ($allReviews as $review)
+            <div class="min-w-[295px] rounded mb-4">
+                <div class="flex justify-between">
+                    <div class="flex gap-2 items-center">
+                        <img src="{{ $review->user->profile_photo ?? '/img/home/profil-ulasan.jpg' }}" alt="profil" class="w-[44px] h-[44px] rounded-full object-cover">
+                        <span class="font-[600] text-[16px] ">{{ $review->user->first_name ?? 'User' }}</span>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-[500] text-[12px] text-[#90A3BF]">
+                            {{ \Carbon\Carbon::parse($review->created_at)->format('d M Y') }}
+                        </div>
+                        <div class="font-[500] text-[12px] text-[#90A3BF]">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <i class="{{ $i <= $review->rating ? 'fas' : 'far' }} fa-star text-yellow-400"></i>
+                            @endfor
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <p class="w-full line-clamp-2 mt-2 text-[#1A202C]">
+                    {{ $review->isi }}
+                </p>
             </div>
-            <p class="w-full line-clamp-2">We are very happy with the service from the MORENT App. Morent has a low price We are very happy with the service from the MORENT App </p>
-          </div>
-          <div class="min-w-[295px] rounded">
-            <div class="flex justify-between">
-              <div class="flex gap-2 items-center">
-                <img src="/img/home/profil-ulasan.jpg" alt="profil" class="w-[44px] rounded-full">
-                <span class="font-[600] text-[16px] ">Alex Stanton</span>
-              </div>
-              <div class="">
-                <div class="font-[500] text-[12px] text-[#90A3BF] text-end">21 July 2022</div>
-                <div class="font-[500] text-[12px] text-[#90A3BF]">
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="far fa-star text-yellow-400"></i>
-                </div>
-              </div>
-            </div>
-            <p class="w-full line-clamp-2">We are very happy with the service from the MORENT App. Morent has a low price We are very happy with the service from the MORENT App </p>
-          </div>
-          <div class="min-w-[295px] rounded">
-            <div class="flex justify-between">
-              <div class="flex gap-2 items-center">
-                <img src="/img/home/profil-ulasan.jpg" alt="profil" class="w-[44px] rounded-full">
-                <span class="font-[600] text-[16px] ">Alex Stanton</span>
-              </div>
-              <div class="">
-                <div class="font-[500] text-[12px] text-[#90A3BF] text-end">21 July 2022</div>
-                <div class="font-[500] text-[12px] text-[#90A3BF]">
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="far fa-star text-yellow-400"></i>
-                </div>
-              </div>
-            </div>
-            <p class="w-full line-clamp-2">We are very happy with the service from the MORENT App. Morent has a low price We are very happy with the service from the MORENT App </p>
-          </div>
-          <div class="min-w-[295px] rounded">
-            <div class="flex justify-between">
-              <div class="flex gap-2 items-center">
-                <img src="/img/home/profil-ulasan.jpg" alt="profil" class="w-[44px] rounded-full">
-                <span class="font-[600] text-[16px] ">Alex Stanton</span>
-              </div>
-              <div class="">
-                <div class="font-[500] text-[12px] text-[#90A3BF] text-end">21 July 2022</div>
-                <div class="font-[500] text-[12px] text-[#90A3BF]">
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="far fa-star text-yellow-400"></i>
-                </div>
-              </div>
-            </div>
-            <p class="w-full line-clamp-2">We are very happy with the service from the MORENT App. Morent has a low price We are very happy with the service from the MORENT App </p>
-          </div>
-          <div class="min-w-[295px] rounded">
-            <div class="flex justify-between">
-              <div class="flex gap-2 items-center">
-                <img src="/img/home/profil-ulasan.jpg" alt="profil" class="w-[44px] rounded-full">
-                <span class="font-[600] text-[16px] ">Alex Stanton</span>
-              </div>
-              <div class="">
-                <div class="font-[500] text-[12px] text-[#90A3BF] text-end">21 July 2022</div>
-                <div class="font-[500] text-[12px] text-[#90A3BF]">
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="fas fa-star text-yellow-400"></i>
-                  <i class="far fa-star text-yellow-400"></i>
-                </div>
-              </div>
-            </div>
-            <p class="w-full line-clamp-2">We are very happy with the service from the MORENT App. Morent has a low price We are very happy with the service from the MORENT App </p>
-          </div>
+          @endforeach
         </div>
       </div>
 
