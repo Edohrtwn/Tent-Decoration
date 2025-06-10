@@ -52,3 +52,8 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/admin/pemesanan/{id}/status', [AdminPemesananController::class, 'updateStatus'])->name('admin.pemesanan.updateStatus');
     Route::get('/pemesanans/{id}', [AdminPemesananController::class, 'show'])->name('admin.pemesanans.show');
 });
+
+Route::post('/produk/{id}/review', [ProdukController::class, 'storeReview'])
+    ->middleware('auth')
+    ->name('produk.review.store');
+

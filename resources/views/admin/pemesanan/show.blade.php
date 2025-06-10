@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                   <td class="font-medium pr-20 py-1">Status Pembayaran</td>
-                  <td class="font-medium py-1 text-[#FF7F59]">{{ $pemesanan->status_pembayaran }}</td>
+                  <td class="font-medium py-1 text-[#FF7F59]" style="color: {{ $pemesanan->status_pembayaran === 'Sudah Bayar' ? '#7FB519' : '#EF4444' }}">{{ $pemesanan->status_pembayaran }}</td>
                 </tr>
               </tbody>
             </table>

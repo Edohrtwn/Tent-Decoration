@@ -20,46 +20,54 @@
         <p class="text-[#344054] font-semibold text-[24px] !mb-0 mt-8">Review</p>
         <div id="scrollContainer" class="overflow-x-auto sm:overflow-x-hidden select-none -mx-2 px-2">
           <div class="flex gap-4 min-w-max">
-            @foreach(range(1, 4) as $i)
-            <div class="w-[295px] rounded shrink-0 p-4">
-              <div class="flex justify-between mb-2">
-                <div class="flex gap-2 items-center">
-                  <img src="/img/home/profil-ulasan.jpg" alt="profil" class="w-[44px] rounded-full">
-                  <span class="font-semibold text-[16px]">Alex Stanton</span>
-                </div>
-                <div class="text-[#90A3BF] text-[12px] text-right">
-                  <div>21 July 2022</div>
-                  <div>
-                    @for($j = 0; $j < 5; $j++)
-                      <i class="{{ $j < 4 ? 'fas' : 'far' }} fa-star text-yellow-400"></i>
-                    @endfor
+            @foreach($paket->reviews->sortByDesc('created_at') as $review)
+              <div class="w-[295px] rounded shrink-0 p-4">
+                  <div class="flex justify-between mb-2">
+                      <div class="flex gap-2 items-center">
+                          <img src="/img/home/profil-ulasan.jpg" alt="profil" class="w-[44px] rounded-full">
+                          <span class="font-semibold text-[16px]">
+                              {{ optional($review->user)->first_name }} {{ optional($review->user)->last_name }}
+                          </span>
+                      </div>
+                      <div class="text-[#90A3BF] text-[12px] text-right">
+                          <div>{{ $review->created_at->format('d F Y') }}</div>
+                          <div>
+                              @for($j = 0; $j < 5; $j++)
+                                  <i class="{{ $j < $review->rating ? 'fas' : 'far' }} fa-star text-yellow-400"></i>
+                              @endfor
+                          </div>
+                      </div>
                   </div>
-                </div>
+                  <p class="text-sm text-[#344054] line-clamp-2">{{ $review->isi }}</p>
               </div>
-              <p class="text-sm text-[#344054] line-clamp-2">We are very happy with the service from the MORENT App. Morent has a low price.</p>
-            </div>
             @endforeach
+
           </div>
         </div>
-        <p class="text-[#344054] font-semibold text-[24px]  !p-0">Tambahkan Review</p>
+        <p class="text-[#344054] font-semibold text-[24px]  !m-0 !p-0">Tambahkan Review</p>
         <!-- Textarea -->
-        <textarea
-          class="w-full border border-[#D0D5DD] rounded-lg p-3 text-sm text-[#344054] placeholder-[#98A2B3] focus:outline-none focus:ring-2 focus:ring-[#D0D5DD]"
-          rows="4"
-          placeholder="Tulis reviewmu disini"></textarea>
+        <form method="POST" action="{{ route('produk.review.store', $paket->id) }}">
+          @csrf
+          <div x-data="{ rating: 0 }" class="flex items-center gap-1 mb-3">
+              <input type="hidden" name="rating" :value="rating">
+              <template x-for="i in 5" :key="i">
+                  <i 
+                      @click="rating = i" 
+                      :class="i <= rating ? 'fas fa-star text-yellow-400' : 'far fa-star text-gray-300'" 
+                      class="cursor-pointer text-2xl transition-colors duration-200"
+                  ></i>
+              </template>
+          </div>
+          <textarea
+              name="isi"
+              class="w-full border border-[#D0D5DD] rounded-lg p-3 text-sm text-[#344054] placeholder-[#98A2B3] focus:outline-none focus:ring-2 focus:ring-[#D0D5DD]"
+              rows="4"
+              placeholder="Tulis reviewmu disini" required></textarea>
 
-        <!-- Input Text -->
-        <input
-          type="text"
-          class="w-full border border-[#D0D5DD] rounded-lg p-3 text-sm text-[#344054] placeholder-[#98A2B3] mt-4 focus:outline-none focus:ring-2 focus:ring-[#D0D5DD]"
-          placeholder="Nama Lengkap" />
-
-        <input
-          type="email"
-          class="w-full border border-[#D0D5DD] rounded-lg p-3 text-sm text-[#344054] placeholder-[#98A2B3] mt-4 focus:outline-none focus:ring-2 focus:ring-[#D0D5DD]"
-          placeholder="Email" />
-
-        <button class="bg-[#3563E9] text-white mt-3 px-15 py-1 rounded-lg cursor-pointer">Kirim Review</button>
+          <button class="bg-[#3563E9] text-white mt-4 px-6 py-2 rounded-lg cursor-pointer">
+            Kirim Review
+          </button>
+        </form>
 
       </div>
 
@@ -67,12 +75,10 @@
         <p class="text-center text-black font-bold text-[32px] !p-0 !m-0">{{ $paket->nama_paket }}</p>
         <p class="text-center text-[#3563E9] font-bold text-[32px] !p-0 !m-0">Rp{{ number_format($paket->harga, 0, ',', '.') }}</p>
         <div class="flex justify-center items-center">
-          <i class="fas fa-star text-yellow-400 me-1"></i>
-          <i class="fas fa-star text-yellow-400 me-1"></i>
-          <i class="fas fa-star text-yellow-400 me-1"></i>
-          <i class="fas fa-star text-yellow-400 me-1"></i>
-          <i class="far fa-star text-yellow-400 me-1"></i>
-          <span class="text-[#596780] font-semibold ">+21 Review</span>
+          @for ($i = 1; $i <= 5; $i++)
+              <i class="{{ $i <= $averageRating ? 'fas' : 'far' }} fa-star text-yellow-400 me-1"></i>
+          @endfor
+          <span class="text-[#596780] font-semibold">{{ $totalReviews }} Review</span>
         </div>
         <p class=" text-black font-semibold text-[24px] !p-0 !m-0">Deskripsi Layanan</p>
         <ul class="list-disc ps-5 !m-0 ">
