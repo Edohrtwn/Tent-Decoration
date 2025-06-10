@@ -39,11 +39,6 @@
         </table>
         
     </div>
-    <a href="{{ route('paket-dekorasi.create') }}">
-        <button class="cursor-pointer bg-[#3563E9] hover:bg-blue-700 text-white px-8 font-bold py-1 rounded shadow transition mt-5 ">
-            Tambah Paket
-        </button>
-    </a>
 </div>
 
 <script>

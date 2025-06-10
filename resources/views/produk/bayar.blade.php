@@ -50,15 +50,29 @@
           @if(session('success'))
             <p class="text-green-600">{{ session('success') }}</p>
           @endif
-          <form action="{{ route('pembayaran.upload') }}" method="POST" enctype="multipart/form-data">
+          
+          <form id="formPembayaran" action="{{ route('pembayaran.upload') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" value="{{ $pemesanan->id }}">
             <p class=" text-[#344054] font-semibold text-[16px] !p-0 !m-0">Bukti Pembayaran <span class="!font-bold !text-red-500">*</span> </p>
             <input type="file" name="bukti_pembayaran" class="border border-[#D0D5DD] block w-full cursor-pointer px-3 py-1 rounded" />
-            <button class="bg-[#3563E9] text-white mt-3 py-1 rounded-lg cursor-pointer w-full">
+            
+          </form>
+          <div class="flex justify-between">
+            <form action="{{ route('admin.pemesanan.updateStatus', $pemesanan->id) }}" method="POST">
+              @csrf
+              @method('PUT')
+              <input type="hidden" name="status_pembayaran" value="Cancel">
+              <button type="submit" class="bg-[#FF4423] text-white mt-3 py-1 rounded-lg cursor-pointer px-10">
+                  Batalkan Pesanan
+              </button>
+            </form>
+
+            <button onclick="document.getElementById('formPembayaran').submit();" class="bg-[#3563E9] text-white mt-3 py-1 rounded-lg cursor-pointer px-10">
               Kirim Bukti Pembayaran
             </button>
-          </form>
+          </div>
+          
           @if($pemesanan->bukti_pembayaran)
             <div class="mt-4">
               <p>Status: <strong>{{ ucfirst($pemesanan->status_pembayaran) }}</strong></p>

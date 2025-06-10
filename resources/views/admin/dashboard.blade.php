@@ -32,7 +32,7 @@
             </tr>
           </tbody>
         </table>
-        <a href="{{ route('password.edit') }}" class="no-underline py-1 px-20 mt-4 inline-flex gap-2 items-center !text-[#FFFFFF] bg-[#3563E9] font-semibold text-[14px] rounded-md ">
+        <a href="{{ route('admin.dashboard.password.edit') }}" class="no-underline py-1 px-20 mt-4 inline-flex gap-2 items-center !text-[#FFFFFF] bg-[#3563E9] font-semibold text-[14px] rounded-md ">
           Ubah Password
         </a>
       </div>

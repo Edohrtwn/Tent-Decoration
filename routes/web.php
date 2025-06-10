@@ -5,7 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardAdmin;
 use App\Http\Controllers\DashboardUser;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KontakController;
 use App\Http\Controllers\PaketDekorasiController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\ProdukController;
@@ -46,18 +48,21 @@ Route::get('/berhasil/{id}', [PembayaranController::class, 'berhasil'])->name('p
 Route::post('/pembayaran/upload', [PembayaranController::class, 'uploadBukti'])->name('pembayaran.upload');
 
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/dashboard', [DashboardAdmin::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [DashboardAdmin::class, 'index'])->name('admin.dashboard.home');
     Route::get('/pemesanans', [AdminPemesananController::class, 'index'])->name('admin.pemesanans.index');
-    Route::put('/admin/pemesanan/{id}/status', [AdminPemesananController::class, 'updateStatus'])->name('admin.pemesanan.updateStatus');
     Route::get('/pemesanans/{id}', [AdminPemesananController::class, 'show'])->name('admin.pemesanans.show');
+    Route::get('/kontak', [KontakController::class, 'index'])->name('kontak.index');
+    Route::get('/kontak/{id}/edit', [KontakController::class, 'edit'])->name('kontak.edit');
+    Route::put('/kontak/{id}', [KontakController::class, 'update'])->name('kontak.update');
+    Route::get('/ubah-password', [PasswordController::class, 'edit'])->name('admin.dashboard.password.edit');
+    Route::post('/ubah-password', [PasswordController::class, 'update'])->name('password.update');
 });
+    Route::put('/admin/pemesanan/{id}/status', [AdminPemesananController::class, 'updateStatus'])->name('admin.pemesanan.updateStatus');
+
 
 Route::post('/produk/{id}/review', [ProdukController::class, 'storeReview'])
     ->middleware('auth')
     ->name('produk.review.store');
 
-    Route::middleware(['auth'])->group(function () {
-    Route::get('/ubah-password', [App\Http\Controllers\PasswordController::class, 'edit'])->name('password.edit');
-    Route::post('/ubah-password', [App\Http\Controllers\PasswordController::class, 'update'])->name('password.update');
-});
+    
 

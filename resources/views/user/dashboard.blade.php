@@ -5,27 +5,30 @@
     <h1 class="text-center !text-[#0A196F]">Selamat Datang!</h1>
     <div class="flex sm:flex-row flex-col gap-4">
       <div class="basis-1/3 border border-[#C3D4E9] rounded flex flex-col items-center justify-center">
-        <img src="/img/dashboard-admin/avatar.png" class="w-[110px] h-[110px] rounded-full" alt="">
-        <span class="font-semibold text-[24px]">Saitama</span>
+        <img 
+          src="{{ $user->profile_photo ? asset('storage/' . $user->profile_photo) : '/img/dashboard-admin/avatar.png' }}"
+          class="w-[110px] h-[110px] rounded-full" 
+          alt="">
+        <span class="font-semibold text-[24px]">{{ $user->first_name }} {{ $user->last_name }}</span>
       </div>
       <div class="basis-2/3 border border-[#C3D4E9] rounded p-[32px]">
         <table class="table-auto">
           <tbody>
             <tr>
               <td class="text-[#000000] font-medium pr-6 py-1">Nama</td>
-              <td class="text-[#000000] font-medium py-1">: Roger</td>
+              <td class="text-[#000000] font-medium py-1">: {{ $user->first_name }} {{ $user->last_name }}</td>
             </tr>
             <tr>
               <td class="text-[#000000] font-medium pr-6 py-1">Email</td>
-              <td class="text-[#000000] font-medium py-1">: admin@tentdec.com</td>
+              <td class="text-[#000000] font-medium py-1">: {{ $user->email }}</td>
             </tr>
             <tr>
               <td class="text-[#000000] font-medium pr-6 py-1">No Hp</td>
-              <td class="text-[#000000] font-medium py-1">: +628992321523</td>
+              <td class="text-[#000000] font-medium py-1">: {{ $user->phone }}</td>
             </tr>
             <tr>
               <td class="text-[#000000] font-medium pr-6 py-1">Alamat</td>
-              <td class="text-[#000000] font-medium py-1">: Kota jambi</td>
+              <td class="text-[#000000] font-medium py-1">: {{ $user->address }}</td>
             </tr>
           </tbody>
         </table>

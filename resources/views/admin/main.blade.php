@@ -15,10 +15,10 @@
     <div class="text-xl font-bold text-[32px] text-[#3563E9]"><a href="/">Tent Decoration</a></div>
     <div class="flex items-center gap-4">
       <img src="/img/dashboard-admin/avatar.png" alt="Profile" class="w-10 h-10 rounded-full object-cover">
-      <form method="POST" action="{{ route('logout') }}">
+      <form id="logout-form" method="POST" action="{{ route('logout') }}">
         @csrf
-        <button type="submit" class="border border-[#C3D4E966] rounded-full p-1 cursor-pointer">
-          <img src="/img/dashboard-admin/logout.png" alt="Logout" class="w-[24px] h-[24px] object-cover">
+        <button type="button" id="logout-button" class="ms-2 border border-[#C3D4E966] rounded-full p-1 cursor-pointer">
+            <img src="/img/dashboard-admin/logout.png" alt="Logout" class="w-[24px] h-[24px] object-cover" />
         </button>
       </form>
     </div>
@@ -31,11 +31,11 @@
     <aside class="w-[289px] bg-white shadow-lg p-4 px-6 flex flex-col justify-between">
       <div>
         <nav class="space-y-2">
-          <a href="{{ route('admin.dashboard') }}" class="py-2 px-5 flex gap-2 items-center text-[#FFFFFF] bg-[#3563E9] font-semibold text-[14px] rounded-md {{ Route::is('admin.dashboard') ? 'text-white bg-[#3563E9]' : 'text-black bg-[#FAFAFA]' }}">
-          <img src="{{ Route::is('admin.dashboard') ? asset('img/dashboard-admin/icon-dashboard-active.png') : asset('img/dashboard-admin/icon-dashboard.png') }}" class="w-[24px] h-[24px] rounded-full object-cover">Dashboard
+          <a href="{{ route('admin.dashboard.home') }}" class="py-2 px-5 flex gap-2 items-center text-[#FFFFFF] bg-[#3563E9] font-semibold text-[14px] rounded-md {{ Route::is('admin.dashboard.*') ? 'text-white bg-[#3563E9]' : 'text-black bg-[#FAFAFA]' }}">
+          <img src="{{ Route::is('admin.dashboard.*') ? asset('img/dashboard-admin/icon-dashboard-active.png') : asset('img/dashboard-admin/icon-dashboard.png') }}" class="w-[24px] h-[24px] rounded-full object-cover">Dashboard
           </a>
 
-          <a href="#" class="py-2 px-5 flex gap-2 items-center text-[#000000] bg-[#FAFAFA] font-semibold text-[14px] rounded-md">
+          <a href="{{ route('kontak.index') }}" class="py-2 px-5 flex gap-2 items-center text-[#000000] bg-[#FAFAFA] font-semibold text-[14px] rounded-md">
           <img src="/img/dashboard-admin/icon-setting.png" alt="Profile" class="w-[24px] h-[24px] rounded-full object-cover">Pengaturan
           </a>
 
@@ -56,6 +56,26 @@
     </main>
 
   </div>
+  <script>
+    document.getElementById('logout-button').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default form submission initially
+
+        Swal.fire({
+            title: 'Anda Yakin?',
+            text: "Anda akan logged out!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('logout-form').submit(); // Submit the form if confirmed
+            }
+        })
+    });
+</script>
 </body>
 
 </html>
