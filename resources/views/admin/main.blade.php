@@ -35,8 +35,9 @@
           <img src="{{ Route::is('admin.dashboard.*') ? asset('img/dashboard-admin/icon-dashboard-active.png') : asset('img/dashboard-admin/icon-dashboard.png') }}" class="w-[24px] h-[24px] rounded-full object-cover">Dashboard
           </a>
 
-          <a href="{{ route('kontak.index') }}" class="py-2 px-5 flex gap-2 items-center text-[#000000] bg-[#FAFAFA] font-semibold text-[14px] rounded-md">
-          <img src="/img/dashboard-admin/icon-setting.png" alt="Profile" class="w-[24px] h-[24px] rounded-full object-cover">Pengaturan
+          <a href="{{ route('kontak.index') }}" class="py-2 px-5 flex gap-2 items-center font-semibold text-[14px] rounded-md {{ Route::is('kontak.*') ? 'text-white bg-[#3563E9]' : 'text-black bg-[#FAFAFA]' }}">
+          <img src="{{ Route::is('kontak.*') ? asset('/img/dashboard-admin/icon-setting-active.png') : asset('/img/dashboard-admin/icon-setting.png') }}"
+           alt="Profile" class="w-[24px] h-[24px] rounded-full object-cover">Pengaturan
           </a>
 
           <p class="mt-8 text-[#0A0A0B] text-[12px] font-bold">Mater Data</p>

@@ -4,7 +4,6 @@
 <div class="container mx-auto p-6">
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-semibold text-gray-800">Daftar Paket Dekorasi</h2>
-        
     </div>
 
     <div class="overflow-x-auto bg-white shadow rounded">

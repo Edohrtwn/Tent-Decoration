@@ -3,7 +3,6 @@
 @section('container')
   <h2 class="text-[40px] text-[#0A196F] mt-5 font-semibold mb-4 text-center ">Ubah Password</h2>
   <div class=" bg-white p-6 rounded flex justify-center">
-      
 
       <form class="w-[557px]" method="POST" action="{{ route('password.update') }}">
           @csrf
