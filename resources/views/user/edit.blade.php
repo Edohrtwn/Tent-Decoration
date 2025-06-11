@@ -11,10 +11,10 @@
       {{-- Profile Photo --}}
       {{-- Foto Profile --}}
 <div class="mb-4">
-  <label class="block text-[16px] text-[#344054] font-semibold">Foto Profile</label>
-  <div class="mb-2">
+  <label class="block text-[16px] text-center text-[#344054] font-semibold">Foto Profile</label>
+  <div class="mb-2 flex justify-center">
     <img id="preview-photo"
-         src="{{ $user->profile_photo ? asset('storage/' . $user->profile_photo) : 'https://via.placeholder.com/100' }}"
+         src="{{ $user->profile_photo ? asset('storage/' . $user->profile_photo) : '/img/dashboard-admin/avatar.png' }}"
          alt="Foto Profile"
          class="w-[100px] h-[100px] object-cover rounded-full">
   </div>
