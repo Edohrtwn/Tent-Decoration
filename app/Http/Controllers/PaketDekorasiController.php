@@ -6,14 +6,27 @@ use Illuminate\Http\Request;
 
 use App\Models\PaketDekorasi;
 use App\Models\DekorasiPhoto;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Storage;
 
 class PaketDekorasiController extends Controller
 {
     public function index()
     {
-        $pakets = PaketDekorasi::with('dekorasi_photos')->get();
-        return view('paket.index', compact('pakets'));
+        $pakets = PaketDekorasi::with(['dekorasi_photos', 'pemesanans'])->get();
+
+        $bookedDates = $pakets->flatMap(function ($paket) {
+            return $paket->pemesanans
+                ->filter(fn($p) => $p->status_pembayaran !== 'Cancel')
+                ->flatMap(function ($p) {
+                    return collect(CarbonPeriod::create(
+                        $p->tanggal_mulai,
+                        $p->tanggal_selesai
+                    ))->map(fn($date) => $date->format('Y-m-d'));
+                });
+        })->unique()->values()->all();
+
+        return view('paket.index', compact('pakets', 'bookedDates'));
     }
 
     public function create()

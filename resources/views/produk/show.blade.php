@@ -24,7 +24,9 @@
               <div class="w-[295px] rounded shrink-0 p-4">
                   <div class="flex justify-between mb-2">
                       <div class="flex gap-2 items-center">
-                          <img src="/img/home/profil-ulasan.jpg" alt="profil" class="w-[44px] rounded-full">
+                          <img src="{{ $review->user && $review->user->profile_photo ? asset('storage/' . $review->user->profile_photo) : asset('/img/home/profil-ulasan.jpg') }}"
+     alt="profil" class="w-[44px] h-[44px] rounded-full object-cover">
+
                           <span class="font-semibold text-[16px]">
                               {{ optional($review->user)->first_name }} {{ optional($review->user)->last_name }}
                           </span>

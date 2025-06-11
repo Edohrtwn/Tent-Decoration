@@ -48,7 +48,12 @@
             <div class="min-w-[295px] rounded mb-4">
                 <div class="flex justify-between">
                     <div class="flex gap-2 items-center">
-                        <img src="{{ $review->user->profile_photo ?? '/img/home/profil-ulasan.jpg' }}" alt="profil" class="w-[44px] h-[44px] rounded-full object-cover">
+                        <img 
+  src="{{ $review->user && $review->user->profile_photo 
+      ? asset('storage/' . $review->user->profile_photo) 
+      : asset('/img/home/profil-ulasan.jpg') }}" 
+  alt="profil" 
+  class="w-[44px] h-[44px] rounded-full object-cover">
                         <span class="font-[600] text-[16px] ">{{ $review->user->first_name ?? 'User' }}</span>
                     </div>
                     <div class="text-right">
