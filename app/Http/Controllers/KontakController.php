@@ -20,26 +20,29 @@ class KontakController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'alamat' => 'nullable|string',
-            'instagram' => 'nullable|url',
-            'tiktok' => 'nullable|url',
-            'whatsapp' => 'nullable|url',
-            'qris' => 'nullable|image|mimes:jpeg,png,jpg',
-        ]);
+{
+    $request->validate([
+        'alamat' => 'nullable|string',
+        'instagram' => 'nullable|url',
+        'tiktok' => 'nullable|url',
+        'whatsapp' => 'nullable|url',
+        'qris' => 'nullable|image|mimes:jpeg,png,jpg',
+    ]);
 
-        $kontak = Kontak::findOrFail($id);
-        $kontak->alamat = $request->alamat;
-        $kontak->instagram = $request->instagram;
-        $kontak->tiktok = $request->tiktok;
-        $kontak->whatsapp = $request->whatsapp;
+    $kontak = Kontak::findOrFail($id);
+    $kontak->alamat = $request->alamat;
+    $kontak->instagram = $request->instagram;
+    $kontak->tiktok = $request->tiktok;
+    $kontak->whatsapp = $request->whatsapp;
 
+    if ($request->hasFile('qris')) {
         $path = $request->file('qris')->store('qris', 'public');
         $kontak->qris = $path;
-
-        $kontak->save();
-
-        return redirect()->route('kontak.index')->with('success', 'Data berhasil diperbarui!');
     }
+
+    $kontak->save();
+
+    return redirect()->route('kontak.index')->with('success', 'Data berhasil diperbarui!');
+}
+
 }

@@ -5,10 +5,15 @@
     <h1 class="text-center !text-[#0A196F]">Selamat Datang!</h1>
     <div class="flex sm:flex-row flex-col gap-4">
       <div class="basis-1/3 border border-[#C3D4E9] rounded flex flex-col items-center justify-center">
-        <img 
-          src="{{ $user->profile_photo ? asset('storage/' . $user->profile_photo) : '/img/dashboard-admin/avatar.png' }}"
-          class="w-[110px] h-[110px] rounded-full" 
-          alt="">
+        <div class="w-[110px] h-[110px] rounded-full overflow-hidden">
+          <img 
+            src="{{ $user->profile_photo ? asset('storage/' . $user->profile_photo) : '/img/dashboard-admin/avatar.png' }}"
+            class="w-full h-full object-cover"
+            alt=""
+          >
+        </div>
+
+
         <span class="font-semibold text-[24px]">{{ $user->first_name }} {{ $user->last_name }}</span>
       </div>
       <div class="basis-2/3 border border-[#C3D4E9] rounded p-[32px]">

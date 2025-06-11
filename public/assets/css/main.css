@@ -134,6 +134,10 @@
   font-weight: 400;
 }
 
+:root {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   color: #222222;

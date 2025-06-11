@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
 
         Kontak::create([
             'alamat' => 'JL. Kasang Pudak RT.14 Lorong Pesantren Kec.Kumpeh Ulu',
-            'instagram'  => 'https://www.instagram.com/',
+            'instagram'  => 'https://www.instagram.com/tentdecoration.id?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
             'tiktok'      => 'https://www.tiktok.com/',
             'whatsapp'      => 'https://web.whatsapp.com/',
         ]);

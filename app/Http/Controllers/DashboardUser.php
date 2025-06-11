@@ -34,7 +34,7 @@ class DashboardUser extends Controller
             'last_name'  => 'required|string|max:255',
             'phone'      => 'nullable|string|max:20',
             'address'    => 'nullable|string|max:255',
-            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg',
             'current_password' => 'nullable|required_with:new_password|string',
             'new_password' => 'nullable|string|confirmed|min:6',
         ]);
