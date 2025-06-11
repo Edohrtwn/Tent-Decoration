@@ -120,6 +120,7 @@
 
     // === Desktop (Mouse) ===
     container.addEventListener('mousedown', (e) => {
+      e.preventDefault();
       isDragging = true;
       startX = e.pageX - container.offsetLeft;
       scrollLeft = container.scrollLeft;
@@ -143,6 +144,7 @@
 
     // === Mobile (Touch) ===
     container.addEventListener('touchstart', (e) => {
+      e.preventDefault();
       isDragging = true;
       startX = e.touches[0].pageX - container.offsetLeft;
       scrollLeft = container.scrollLeft;

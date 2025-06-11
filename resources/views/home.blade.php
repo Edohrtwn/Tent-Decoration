@@ -107,7 +107,7 @@
               <p class="!text-[16px] w-full !font-medium !text-[#878C91] !p-0 !m-0 text-justify">
                 Anda akan menemukan jawaban atas pertanyaan yang sering diajukan tentang layanan penyewaan tenda dan dekorasi kami. Kami berkomitmen untuk memberikan pengalaman yang mudah dan menyenangkan untuk acara Anda. Jika Anda tidak menemukan jawaban yang Anda cari, jangan ragu untuk menghubungi tim customer service kami yang siap membantu kapan saja.
               </p>
-              <a href="/" class="!no-underline hover:!no-underline border !text-black w-fit px-8 rounded-full py-2">Hubungi Kami</a>
+              <a href="{{ $kontak->whatsapp }}" target="_blank" class="!no-underline hover:!no-underline border !text-black w-fit px-8 rounded-full py-2">Hubungi Kami</a>
             </div>
           </div>
           <div id="accordion">
@@ -154,7 +154,7 @@
     <div class="px-16 pb-16">
       <p class="!text-[64px] !font-semibold !p-0 !m-0 text-center leading-[1.2]">Pesan tenda dan dekorasi untuk acara Anda sekarang!</p>
       <div class="flex justify-center">
-        <a class="bg-[#3563E9] !px-4 !py-2 rounded !text-[16px] !no-underline !text-white !font-medium !mt-4 ">Hubungi Kami</a>
+        <a href="{{ $kontak->whatsapp }}" target="_blank" class="bg-[#3563E9] !px-4 !py-2 rounded !text-[16px] !no-underline !text-white !font-medium !mt-4 ">Hubungi Kami</a>
       </div>
     </div>   
   </div>

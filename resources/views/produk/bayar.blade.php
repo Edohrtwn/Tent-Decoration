@@ -4,7 +4,7 @@
   <div class="bg-[#F8FAFF] sm:px-25 px-8 sm:py-16 py-8">
     <div class="grid sm:grid-cols-2 grid-cols-1 gap-8">
       <div>
-        <img class="!w-full object-cover rounded-lg border border-[#D0D5DD]" src="/img/bayar/qris.png" />
+        <img class="!w-full object-cover rounded-lg border border-[#D0D5DD]" src="{{ asset('storage/' . $kontak->qris) }}" />
       </div>
 
       <div class="bg-white border border-[#90A3BF80] rounded-md p-4">
