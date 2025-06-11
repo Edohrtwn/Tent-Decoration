@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kontaks', function (Blueprint $table) {
             $table->id();
-            $table->string('alamat')->nullable()->default('JL. Kasang Pudak RT.14 Lorong Pesantren Kec.Kumpeh Ulu');
+            $table->string('alamat')->nullable();
             $table->string('instagram')->nullable();
             $table->string('tiktok')->nullable();
             $table->string('whatsapp')->nullable();

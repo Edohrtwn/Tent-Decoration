@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Kontak;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -30,6 +31,13 @@ class UserSeeder extends Seeder
             'address'    => 'Alamat User',
             'password'   => Hash::make('123456'), // HARUS di-hash
             'role'       => 'user',
+        ]);
+
+        Kontak::create([
+            'alamat' => 'JL. Kasang Pudak RT.14 Lorong Pesantren Kec.Kumpeh Ulu',
+            'instagram'  => 'https://www.instagram.com/',
+            'tiktok'      => 'https://www.tiktok.com/',
+            'whatsapp'      => 'https://web.whatsapp.com/',
         ]);
     }
 }
