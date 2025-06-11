@@ -7,12 +7,15 @@
           <p class="!text-[14px] !font-normal text-white !p-0 !m-0 leading-[1.2] w-[300px]">All rights reserved</p>
         </div>
         <div class="">
-          <p class="!text-[20px] !font-semibold text-white !p-0 !m-0 leading-[1.2]">Navigasi</p>
-          <p class="!text-[14px] !font-normal text-white leading-[1.2]">Katalog</p>
-          <p class="!text-[14px] !font-normal text-white leading-[1.2]">Cara Pemesanan</p>
-          <p class="!text-[14px] !font-normal text-white leading-[1.2]">Hubungi Kami</p>
-          <p class="!text-[14px] !font-normal text-white leading-[1.2]">Testimoni</p>
+          @if (Request::is('/'))
+              <p class="!text-[20px] !font-semibold text-white !p-0 !m-0 leading-[1.2]">Navigasi</p>
+              <p class="!text-[14px] !font-normal text-white leading-[1.2]"><a href="#katalog" class="!text-white no-underline hover:!no-underline">Katalog</a></p>
+              <p class="!text-[14px] !font-normal text-white leading-[1.2]"><a href="#carapemesanan" class="!text-white no-underline hover:!no-underline">Cara Pemesanan</a></p>
+              <p class="!text-[14px] !font-normal text-white leading-[1.2]"><a href="{{ $kontak->whatsapp }}" target="_blank" class="!text-white no-underline hover:!no-underline">Hubungi Kami</a></p>
+              <p class="!text-[14px] !font-normal text-white leading-[1.2]"><a href="#testimoni" class="!text-white no-underline hover:!no-underline">Testimoni</a></p>
+          @endif
         </div>
+
         <div class="">
           <p class="!text-[20px] !font-semibold text-white !p-0 !m-0 leading-[1.2]">Informasi</p>
           <p class="!text-[14px] !font-normal text-white leading-[1.2]"> <a href="{{ $kontak->instagram }}" target="_blank" class="!text-white hover:no-underline no-underline">Instagram</a></p>

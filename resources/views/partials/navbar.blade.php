@@ -7,11 +7,13 @@
           {{-- <div class="page-header__logo logo"><a class="logo__link" href="index.html"><img class="logo__img" src="assets/img/logo.svg" alt="Doremi"></a></div> --}}
         </div>
 
-        <div class="sm:flex hidden gap-x-20">
-          <a href="#katalog" class="!no-underline hover:!no-underline font-bold text-[18px] !text-[#0A196F]">Katalog</a>
-          <a href="#carapemesanan" class="!no-underline hover:!no-underline font-bold text-[18px] !text-[#0A196F]">Cara Pemesanan</a>
-          <a href="#testimoni" class="!no-underline hover:!no-underline font-bold text-[18px] !text-[#0A196F]">Testimoni</a>
-        </div>
+        @if (Request::is('/'))
+          <div class="sm:flex hidden gap-x-20">
+            <a href="#katalog" class="!no-underline hover:!no-underline font-bold text-[18px] !text-[#0A196F]">Katalog</a>
+            <a href="#carapemesanan" class="!no-underline hover:!no-underline font-bold text-[18px] !text-[#0A196F]">Cara Pemesanan</a>
+            <a href="#testimoni" class="!no-underline hover:!no-underline font-bold text-[18px] !text-[#0A196F]">Testimoni</a>
+          </div>
+        @endif
 
         <div class="page-header__right">
           <div class="flex items-center">
@@ -20,8 +22,9 @@
                 <a href="{{ route('register.create') }}" class="!no-underline hover:!no-underline rounded-[8px] bg-[#3563E9] !text-white px-6 py-1">Daftar</a>
             @else
                 <a href="{{ auth()->user()->role === 'admin' ? route('admin.dashboard.home') : route('user.dashboard') }}">
-                    <img src="/img/dashboard-admin/avatar.png" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
-                </a>
+    <img src="{{ auth()->user()->profile_photo ? asset('storage/' . auth()->user()->profile_photo) : '/img/dashboard-admin/avatar.png' }}" alt="Profile" class="w-10 h-10 rounded-full object-cover" />
+</a>
+
 
                 <form id="logout-form" method="POST" action="{{ route('logout') }}">
                   @csrf

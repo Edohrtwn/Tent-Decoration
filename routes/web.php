@@ -12,6 +12,8 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -27,7 +29,11 @@ Route::get('/register', [RegisterController::class, 'create'])->name('register.c
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 // Contoh route tujuan
-Route::middleware(['auth', 'role:user'])->get('/user/dashboard', [DashboardUser::class, 'index'])->name('user.dashboard');
+Route::middleware(['auth', 'role:user'])->prefix('user')->name('user.')->group(function () {
+    Route::get('/dashboard', [DashboardUser::class, 'index'])->name('dashboard');
+    Route::get('/edit-akun', [DashboardUser::class, 'edit'])->name('edit');
+    Route::put('/update-akun', [DashboardUser::class, 'update'])->name('update');
+});
 
 
 
@@ -56,6 +62,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/kontak/{id}', [KontakController::class, 'update'])->name('kontak.update');
     Route::get('/ubah-password', [PasswordController::class, 'edit'])->name('admin.dashboard.password.edit');
     Route::post('/ubah-password', [PasswordController::class, 'update'])->name('password.update');
+    Route::resource('users', UserController::class);
 });
     Route::put('/admin/pemesanan/{id}/status', [AdminPemesananController::class, 'updateStatus'])->name('admin.pemesanan.updateStatus');
 
@@ -65,4 +72,10 @@ Route::post('/produk/{id}/review', [ProdukController::class, 'storeReview'])
     ->name('produk.review.store');
 
     
+Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
 
+    Route::post('/forgot-password', [ResetPasswordController::class, 'passwordEmail']);
+
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'passwordReset'])->name('password.reset');
+
+    Route::post('/reset-password', [ResetPasswordController::class, 'passwordUpdate'])->name('password.resetupdate');

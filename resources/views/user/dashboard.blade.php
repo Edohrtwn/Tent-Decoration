@@ -32,9 +32,10 @@
             </tr>
           </tbody>
         </table>
-        <a href="#" class="!no-underline py-1 px-20 mt-4 inline-flex gap-2 items-center !text-[#FFFFFF] bg-[#3563E9] font-semibold text-[14px] rounded-md ">
-          Ubah Profile
-        </a>
+        <a href="{{ route('user.edit') }}" class="!no-underline py-1 px-20 mt-4 inline-flex gap-2 items-center !text-[#FFFFFF] bg-[#3563E9] font-semibold text-[14px] rounded-md">
+    Ubah Profile
+</a>
+
       </div>
     </div>
     <h1 class="!text-[#0A196F]">Riwayat Pemesanan</h1>

@@ -26,6 +26,6 @@ class PasswordController extends Controller
             'password' => Hash::make($request->new_password),
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Password berhasil diubah.');
+        return redirect()->route('/')->with('success', 'Password berhasil diubah.');
     }
 }

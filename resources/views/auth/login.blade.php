@@ -29,7 +29,10 @@
         </div>
 
         <div class="mb-4 relative">
-          <label class="font-semibold text-[#344054] text-[16px]">Password</label>
+          <div class="flex justify-between">
+            <label class="font-semibold text-[#344054] text-[16px]">Password</label>
+            <a href="{{ route('password.request') }}" class="font-semibold text-[#0A196F] text-[16px]">Lupa Password?</a>
+          </div>
           <input 
             id="password" 
             type="password" 

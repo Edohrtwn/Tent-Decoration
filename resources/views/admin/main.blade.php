@@ -41,8 +41,12 @@
           </a>
 
           <p class="mt-8 text-[#0A0A0B] text-[12px] font-bold">Mater Data</p>
+          <a href="{{ route('users.index') }}" class="py-2 px-5 flex gap-2 items-center text-[#FFFFFF] bg-[#3563E9] font-semibold text-[14px] rounded-md {{ Route::is('users.*') ? 'text-white bg-[#3563E9]' : 'text-black bg-[#FAFAFA]' }}">
+            <img src="{{ Route::is('users.*') ? asset('img/dashboard-admin/icon-bentuk-user-active.png') : asset('img/dashboard-admin/icon-bentuk-user.png') }}" alt="Profile" class="w-[24px] h-[24px] rounded-full object-cover">Data Pengunjung
+          </a>
+
           <a href="{{ route('admin.pemesanans.index') }}" class="py-2 px-5 flex gap-2 items-center text-[#FFFFFF] bg-[#3563E9] font-semibold text-[14px] rounded-md {{ Route::is('admin.pemesanans.*') ? 'text-white bg-[#3563E9]' : 'text-black bg-[#FAFAFA]' }}">
-          <img src="{{ Route::is('admin.pemesanans.*') ? asset('img/dashboard-admin/icon-bentuk-user-active.png') : asset('img/dashboard-admin/icon-bentuk-user.png') }}" alt="Profile" class="w-[24px] h-[24px] rounded-full object-cover">Kelola Pesanan
+            <img src="{{ Route::is('admin.pemesanans.*') ? asset('img/dashboard-admin/icon-bentuk-user-active.png') : asset('img/dashboard-admin/icon-bentuk-user.png') }}" alt="Profile" class="w-[24px] h-[24px] rounded-full object-cover">Kelola Pesanan
           </a>
           <a href="{{ route('paket-dekorasi.index') }}" class="py-2 px-5 flex gap-2 items-center text-[#FFFFFF] bg-[#3563E9] font-semibold text-[14px] rounded-md {{ Route::is('paket-dekorasi.*') ? 'text-white bg-[#3563E9]' : 'text-black bg-[#FAFAFA]' }}">
           <img src="{{ Route::is('paket-dekorasi.*') ? asset('img/dashboard-admin/icon-kelola-paket-active.png') : asset('img/dashboard-admin/icon-kelola-paket.png') }}" alt="Profile" class="w-[24px] h-[24px] rounded-full object-cover">Kelola Paket Dekorasi
