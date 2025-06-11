@@ -35,7 +35,7 @@ class ProdukController extends Controller
         // Hitung total review
         $totalReviews = $reviews->count();
 
-        return view('produk.show', compact('paket', 'bookedDates', 'averageRating', 'totalReviews'));
+        return view('produk.show', compact('paket', 'bookedDates', 'averageRating', 'totalReviews', 'pakets'));
     }
 
     

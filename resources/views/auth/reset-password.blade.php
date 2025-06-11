@@ -73,9 +73,12 @@
           </button>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-4 relative">
           <label class="font-semibold text-[#344054] text-[16px]">Ulangi Password Baru</label>
-          <input type="password" name="password_confirmation" required class="w-full border border-[#D0D5DD] rounded px-3 py-2">
+          <input type="password" id="password_confirmation" name="password_confirmation" required class="w-full border border-[#D0D5DD] rounded px-3 py-2">
+          <button type="button" id="togglePasswordUlang" class="absolute top-9 right-3 text-gray-500" tabindex="-1">
+            👁️
+          </button>
         </div>
 
         <button type="submit" class="cursor-pointer w-full bg-[#264BC8] text-white py-2 rounded text-[16px] font-semibold">
@@ -95,6 +98,17 @@
         const isHidden = passwordInput.getAttribute('type') === 'password';
         passwordInput.setAttribute('type', isHidden ? 'text' : 'password');
         toggleBtn.textContent = isHidden ? '🙈' : '👁️';
+      });
+    }
+
+    const passwordInputUlang = document.getElementById('password_confirmation');
+    const toggleBtnUlang = document.getElementById('togglePasswordUlang');
+
+    if (toggleBtnUlang && passwordInputUlang) {
+      toggleBtnUlang.addEventListener('click', () => {
+        const isHidden = passwordInputUlang.getAttribute('type') === 'password';
+        passwordInputUlang.setAttribute('type', isHidden ? 'text' : 'password');
+        toggleBtnUlang.textContent = isHidden ? '🙈' : '👁️';
       });
     }
   </script>

@@ -154,32 +154,24 @@
 
       </div>
     </div>
+
     <p class="text-[#344054] font-semibold text-[24px] !p-0 !mt-10">Lihat Paket lainnya</p>
     <div class="grid sm:grid-cols-2 grid-cols-1 gap-4">
-      <div class="bg-white border border-[#C2C2C280] p-4 rounded-lg">
-        <img class="!h-[222px] !w-full object-cover rounded-lg" src="/img/home/paket-a.png" />
-        <div class="flex justify-between mt-10">
-          <span class="font-[600] text-[24px]">Paket B</span>
-          <span class="font-[600] text-[24px] text-[#264BC8]">Rp20.000.000</span>
+      @foreach ($pakets as $item)
+        <div class="bg-white border border-[#C2C2C280] p-4 rounded-lg">
+          <img class="!h-[222px] !w-full object-cover rounded-lg" src="{{ asset('storage/' . $item->dekorasi_photos->first()->foto ?? 'img/home/paket-a.png') }}" />
+          <div class="flex justify-between mt-10">
+            <span class="font-[600] text-[24px]">{{ $item->nama_paket }}</span>
+            <span class="font-[600] text-[24px] text-[#264BC8]">Rp{{ number_format($item->harga, 0, ',', '.') }}</span>
+          </div>
+          <div class="font-semibold line-clamp-2">{{ Str::limit(strip_tags($item->detail), 60) }}</div>
+          <a href="{{ route('produk.show', ['id' => $item->id]) }}" class="bg-[#3563E9] px-2 py-1 rounded 
+            text-[16px] !no-underline !text-white font-medium mt-4 inline-block">
+            Sewa Sekarang
+          </a>
         </div>
-        <div class="font-semibold">Kenyamanan dan Keindahan: Solusi Sempurna untuk Acara Anda</div>
-        <a href="{{ route('produk.show', ['id' => '2']) }}" class="bg-[#3563E9] px-2 py-1 rounded 
-          text-[16px] !no-underline !text-white font-medium mt-4 inline-block">
-          Sewa Sekarang
-        </a>
-      </div>
-      <div class="bg-white border border-[#C2C2C280] p-4 rounded-lg">
-        <img class="!h-[222px] !w-full object-cover rounded-lg" src="/img/home/paket-a.png" />
-        <div class="flex justify-between mt-10">
-          <span class="font-[600] text-[24px]">Paket C</span>
-          <span class="font-[600] text-[24px] text-[#264BC8]">Rp15.000.000</span>
-        </div>
-        <div class="font-semibold">Pilihan Hemat dengan Kualitas Terbaik</div>
-        <a href="{{ route('produk.show', ['id' => '2']) }}" class="bg-[#3563E9] px-2 py-1 rounded 
-          text-[16px] !no-underline !text-white font-medium mt-4 inline-block">
-          Sewa Sekarang
-        </a>
-      </div>
+      @endforeach
+      
     </div>
 
   </div>
